@@ -19,9 +19,21 @@ jobs:
       actions: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: NixOS/nixpkgs
+          ref: ${{ matrix.nixpkgs }}
+          fetch-depth: 1
+          path: ./nix-path/nixpkgs
+      - uses: actions/checkout@v4
+        with:
+          repository: LnL7/nix-darwin
+          ref: ${{ matrix.nix-darwin }}
+          fetch-depth: 1
+          path: ./nix-path/darwin
       - uses: cachix/install-nix-action@v27
         with:
-          nix_path: "${{ github.workspace }}:nixpkgs=https://github.com/NixOS/nixpkgs/archive/${{ matrix.nixpkgs }}.tar.gz:darwin=https://github.com/LnL7/nix-darwin/archive/${{ matrix.nix-darwin }}.tar.gz"
+          nix_path: ${{ github.workspace }}/nix_path:darwin-config=${{ github.workspace }}/configuration.nix
       - name: Resolve https://github.com/NixOS/nix/issues/10892
         # https://github.com/NixOS/nix/issues/10892#issuecomment-2600755196
         run: curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
