@@ -39,6 +39,10 @@ jobs:
       # https://github.com/cachix/install-nix-action/blob/5b8c65d4d79bb2d232054c72252fa78a29c36b8a/README.md#how-do-i-print-nixpkgs-version-i-have-configured
       - name: Print nixpkgs version
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
+      - name: Print darwin
+        run: nix-instantiate --eval -E 'import <darwin> {}'
+      - name: Print darwin-config
+        run: nix-instantiate --eval -E 'import <darwin-config> {}'
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
       - name: Run `darwin-rebuild switch`
