@@ -40,9 +40,9 @@ jobs:
       - name: Print nixpkgs version
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
       - name: Print darwin
-        run: nix-instantiate --eval -E 'import <darwin> {}'
+        run: nix-instantiate --eval -E 'import <darwin>'
       - name: Print darwin-config
-        run: nix-instantiate --eval -E 'import <darwin-config> {}'
+        run: nix-instantiate --eval -E 'import <darwin-config>'
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
       - name: Run `darwin-rebuild switch`
