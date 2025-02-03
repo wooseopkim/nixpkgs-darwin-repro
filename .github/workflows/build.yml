@@ -19,6 +19,8 @@ jobs:
       actions: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: .
       - uses: actions/checkout@v4
         with:
           repository: NixOS/nixpkgs
