@@ -45,6 +45,12 @@ jobs:
         run: nix-instantiate --eval -E 'import <darwin-config>'
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
+      - name: Print nixpkgs version again
+        run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
+      - name: Print darwin again
+        run: nix-instantiate --eval -E 'import <darwin>'
+      - name: Print darwin-config again
+        run: nix-instantiate --eval -E 'import <darwin-config>'
       - name: Run `darwin-rebuild switch`
         run: ./result/bin/darwin-rebuild switch
       - name: Check if build fails as expected
