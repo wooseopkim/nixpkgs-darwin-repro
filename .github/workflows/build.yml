@@ -34,8 +34,15 @@ jobs:
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
+      - name: Debug logs
+        run: |
+          ls -R ${GITHUB_WORKSPACE}
+          ls ${GITHUB_WORKSPACE}/configuration.nix
+          cat ${GITHUB_WORKSPACE}/configuration.nix
+          echo "darwin-config=${GITHUB_WORKSPACE}/configuration.nix"
+          echo ./result/bin/darwin-rebuild switch -I "darwin-config=${GITHUB_WORKSPACE}/configuration.nix"
       - name: Run `darwin-rebuild switch`
-        run: ./result/bin/darwin-rebuild switch
+        run: ./result/bin/darwin-rebuild switch -I "darwin-config=${GITHUB_WORKSPACE}/configuration.nix"
       - name: Check if build fails as expected
         if: ${{ failure() && matrix.nixpkgs == '434e36ab91be1454bcd4854878d683aaf50633f5' }}
         run: echo 'Build fails'
