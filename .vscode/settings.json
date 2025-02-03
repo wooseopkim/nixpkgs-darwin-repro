@@ -1,0 +1,16 @@
+{
+    "[nix]": {
+        "editor.defaultFormatter": "jnoortheen.nix-ide"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "mkhl.shfmt"
+    },
+    "editor.codeActionsOnSave": {
+        "source": "explicit"
+    },
+    "editor.defaultFormatter": "EditorConfig.EditorConfig",
+    "editor.formatOnSave": true,
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nixd",
+    "shellcheck.enable": true
+}
