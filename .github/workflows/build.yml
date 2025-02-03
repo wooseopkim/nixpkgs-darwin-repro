@@ -10,12 +10,17 @@ jobs:
         nixpkgs:
           - d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2
           - 434e36ab91be1454bcd4854878d683aaf50633f5
+        nix-darwin:
+          - 49b807fa7c37568d7fbe2aeaafb9255c185412f9
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v27
         with:
-          nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/${{ matrix.nixpkgs }}.tar.gz:darwin=https://github.com/LnL7/nix-darwin/archive/49b807fa7c37568d7fbe2aeaafb9255c185412f9.tar.gz
+          nix_path: >-
+            nixpkgs=https://github.com/NixOS/nixpkgs/archive/${{ matrix.nixpkgs }}.tar.gz
+            :
+            darwin=https://github.com/LnL7/nix-darwin/archive/${{ matrix.nix-darwin }}.tar.gz
       # https://github.com/cachix/install-nix-action/blob/5b8c65d4d79bb2d232054c72252fa78a29c36b8a/README.md#how-do-i-print-nixpkgs-version-i-have-configured
       - name: Print nixpkgs version
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
