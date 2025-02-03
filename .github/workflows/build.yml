@@ -33,7 +33,9 @@ jobs:
           ref: ${{ matrix.nix-darwin }}
           fetch-depth: 1
           path: ./nix_path/darwin
-      - run: ls -R "${GITHUB_WORKSPACE}"
+      - run: |
+          ls "${GITHUB_WORKSPACE}"
+          ls "${GITHUB_WORKSPACE}"/nix_path
       - uses: cachix/install-nix-action@v27
         with:
           nix_path: ${{ github.workspace }}/nix_path:darwin-config=${{ github.workspace }}/configuration.nix
