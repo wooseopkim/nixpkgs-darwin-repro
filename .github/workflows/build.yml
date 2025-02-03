@@ -31,9 +31,7 @@ jobs:
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
       - name: Run `darwin-rebuild switch`
-        run: |
-          echo "[${NIX_PATH}]"
-          ./result/bin/darwin-rebuild switch
+        run: ./result/bin/darwin-rebuild switch
       - name: Check if build fails as expected
         if: ${{ failure() && matrix.nixpkgs == '434e36ab91be1454bcd4854878d683aaf50633f5' }}
         run: echo 'Build fails'
