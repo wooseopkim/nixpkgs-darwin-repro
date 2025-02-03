@@ -26,13 +26,13 @@ jobs:
           repository: NixOS/nixpkgs
           ref: ${{ matrix.nixpkgs }}
           fetch-depth: 1
-          path: ./nix-path/nixpkgs
+          path: ./nix_path/nixpkgs
       - uses: actions/checkout@v4
         with:
           repository: LnL7/nix-darwin
           ref: ${{ matrix.nix-darwin }}
           fetch-depth: 1
-          path: ./nix-path/darwin
+          path: ./nix_path/darwin
       - uses: cachix/install-nix-action@v27
         with:
           nix_path: ${{ github.workspace }}/nix_path:darwin-config=${{ github.workspace }}/configuration.nix
