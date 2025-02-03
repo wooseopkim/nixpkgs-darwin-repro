@@ -14,9 +14,6 @@ jobs:
         nix-darwin:
           - 49b807fa7c37568d7fbe2aeaafb9255c185412f9
     runs-on: macos-latest
-    # https://github.com/nix-community/cache-nix-action/blob/741e8fd3ffba1372b7bf7c766d499879b72b4925/README.md#example-steps
-    permissions:
-      actions: write
     steps:
       - uses: actions/checkout@v4
         with:
