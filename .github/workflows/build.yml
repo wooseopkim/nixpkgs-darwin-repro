@@ -34,6 +34,9 @@ jobs:
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
+      - uses: nix-community/cache-nix-action/save@v5
+        with:
+          primary-key: nix-${{ matrix.nixpkgs }}-${{ matrix.nix-darwin }}-${{ hashFiles('**/*.nix') }}
       - name: Run `darwin-rebuild switch`
         run: ./result/bin/darwin-rebuild switch
         env:
