@@ -22,7 +22,7 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           nix_path: |-
-            nixpkgs=https://github.com/NixOS/nixpkgs/archive/${{ matrix.nixpkgs }}.tar.gz:darwin=https://github.com/LnL7/nix-darwin/archive/${{ matrix.nix-darwin }}.tar.gz
+            nixpkgs=https://github.com/NixOS/nixpkgs/archive/${{ matrix.nixpkgs }}.tar.gz:darwin=https://github.com/LnL7/nix-darwin/archive/${{ matrix.nix-darwin }}.tar.gz:darwin-config=${{ github.workspace }}/configuration.nix
       - name: Resolve https://github.com/NixOS/nix/issues/10892
         # https://github.com/NixOS/nix/issues/10892#issuecomment-2600755196
         run: curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
@@ -36,7 +36,7 @@ jobs:
       - name: Build `darwin-rebuild`
         run: nix-build '<darwin>' -A darwin-rebuild
       - name: Run `darwin-rebuild switch`
-        run: ./result/bin/darwin-rebuild switch -I "darwin-config=${GITHUB_WORKSPACE}/configuration.nix"
+        run: ./result/bin/darwin-rebuild switch
       - name: Check if build fails as expected
         if: ${{ failure() && matrix.nixpkgs == '434e36ab91be1454bcd4854878d683aaf50633f5' }}
         run: echo 'Build fails'
