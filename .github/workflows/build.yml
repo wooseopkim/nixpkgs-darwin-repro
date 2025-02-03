@@ -25,7 +25,7 @@ jobs:
       - name: Resolve https://github.com/NixOS/nix/issues/10892
         # https://github.com/NixOS/nix/issues/10892#issuecomment-2600755196
         run: curl --proto '=https' --tlsv1.2 -sSf -L https://github.com/NixOS/nix/raw/master/scripts/sequoia-nixbld-user-migration.sh | bash -
-      - uses: nix-community/cache-nix-action@v5
+      - uses: nix-community/cache-nix-action/restore@v5
         with:
           primary-key: nix-${{ matrix.nixpkgs }}-${{ matrix.nix-darwin }}-${{ hashFiles('**/*.nix') }}
           restore-prefixes-first-match: nix-${{ matrix.nixpkgs }}-
